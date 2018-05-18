@@ -18,7 +18,7 @@ namespace Omegasis.BuildEndurance
         private string DataFilePath => Path.Combine("data", $"{Constants.SaveFolderName}.json");
 
         /// <summary>The absolute path for the current player's legacy data file.</summary>
-        private string LegacyDataFilePath => Path.Combine(this.Helper.DirectoryPath, "PlayerData", $"BuildEndurance_data_{Game1.player.name}.txt");
+        private string LegacyDataFilePath => Path.Combine(this.Helper.DirectoryPath, "PlayerData", $"BuildEndurance_data_{Game1.player.Name}.txt");
 
         /// <summary>The mod settings.</summary>
         private ModConfig Config;
@@ -77,7 +77,7 @@ namespace Omegasis.BuildEndurance
                 return;
 
             // give XP when player finishes eating
-            if (Game1.isEating)
+            if (Game1.player.isEating)
                 this.WasEating = true;
             else if (this.WasEating)
             {
@@ -86,7 +86,7 @@ namespace Omegasis.BuildEndurance
             }
 
             // give XP when player uses tool
-            if (!this.HasRecentToolExp && Game1.player.usingTool)
+            if (!this.HasRecentToolExp && Game1.player.UsingTool)
             {
                 this.PlayerData.CurrentExp += this.Config.ExpForToolUse;
                 this.HasRecentToolExp = true;
@@ -174,7 +174,7 @@ namespace Omegasis.BuildEndurance
                 }
             }
             this.PlayerData.ClearModEffects = false;
-            this.PlayerData.NightlyStamina = Game1.player.maxStamina;
+            this.PlayerData.NightlyStamina = Game1.player.MaxStamina;
 
             // save data
             this.Helper.WriteJsonFile(this.DataFilePath, this.PlayerData);
